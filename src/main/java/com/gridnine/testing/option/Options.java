@@ -37,7 +37,7 @@ public class Options {
     }
 
     @Optionable(description = "Проверить, что имеются сегменты с датой прилёта раньше даты вылета")
-    public static boolean ArriveBeforeDeparture(Flight flight) {
+    public static boolean arriveBeforeDeparture(Flight flight) {
         List<Segment> segments = flight.getSegments();
         for (Segment segment : segments) {
             if (segment.getArrivalDate().compareTo(segment.getDepartureDate()) < 0) {
