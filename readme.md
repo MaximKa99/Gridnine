@@ -10,5 +10,9 @@
 Введите в консоли, находясь в корне проекта, следующую команду:
 `mvn exec:java -Dexec.mainClass=com.gridnine.testing.App`
 
+### Как запустить тесты?
+Запускаем из корневой папки проекта командой
+`mvn test`
+
 ### Автор
 https://github.com/MaximKa99
