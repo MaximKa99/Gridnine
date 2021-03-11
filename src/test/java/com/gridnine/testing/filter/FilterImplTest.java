@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,6 +47,32 @@ class FilterImplTest {
             order.verify(option2).check(Mockito.anyObject());
             order.verify(option3).check(Mockito.anyObject());
         }
+
+    }
+
+    @Test
+    public void checkAllFlightNotPassed() {
+        Option option1 = Mockito.mock(Option.class);
+        Option option2 = Mockito.mock(Option.class);
+        Option option3 = Mockito.mock(Option.class);
+
+        InOrder order = Mockito.inOrder(option1, option2, option3);
+
+        Mockito.when(option1.check(Mockito.anyObject())).thenReturn(false);
+        Mockito.when(option2.check(Mockito.anyObject())).thenReturn(false);
+        Mockito.when(option3.check(Mockito.anyObject())).thenReturn(false);
+
+        List<Option> options = Arrays.asList(option1, option2, option3);
+
+        this.filter.setOptions(options);
+
+        List<Flight> original = FlightBuilder.createFlights();
+
+        List<Flight> expected = new ArrayList<>();
+
+        Assertions.assertEquals(expected, this.filter.filter(original));
+
+        order.verify(option1, Mockito.times(6)).check(Mockito.anyObject());
 
     }
 
